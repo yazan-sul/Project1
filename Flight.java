@@ -17,7 +17,7 @@ public class Flight{
         this.numOfTickets = numOfTickets;
         this.ticketPrice = ticketPrice;
     }
-    public boolean hasTickets(){
+    public  boolean hasTickets(){
         if(numOfTickets>0){
             return true;
         }
@@ -25,7 +25,17 @@ public class Flight{
             return false;
     }
     public Ticket bookTicket(String name){
-        this.numOfTickets--;
-        return new Ticket(name,this);
+        if(hasTickets()){
+            this.numOfTickets--;
+            return new Ticket(name,this);
+        }
+        else
+        {
+            System.out.println("no tickets available");
+            return new Ticket(null, null);
+        }
+    }    
+    public String toString(){
+        return flightNum + destination + originAirport +departureDate +departureTime;
     }
 }

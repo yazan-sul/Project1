@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Date;
+
 public class Project{
     
     public static void main(String[] args) {
@@ -20,6 +21,7 @@ public class Project{
             if(choice == 1){
                 Flight flight = readFlight();
                 boksystem.addFlight(flight);
+                boksystem.printAvailableFlights();
             }
             else if (choice ==2){
                // BookFlight();
@@ -78,36 +80,20 @@ public class Project{
 
 
     }
-   /*  public static void BookFlight(){
+    /*public void BookFlight(){
         Scanner Book = new Scanner(System.in);
         System.out.println();
         int flag = 0;
-        for(int i = 0;i<3;i++){
-            
-            System.out.println(flightNum[i]);
-        }
-        
         System.out.println("Enter the flight number to book tickets: ");
         String Num = Book.nextLine();
-        for(int i = 0;i<index;i++){
-            if(Num.equals(flightNum[i])){
-                flag=1;
-                break;
-            }
-        }
-        if(flag == 1){
-            System.out.println("enter passenger name: ");
-            name[pos] = Book.nextLine();
-            System.out.printf("Ticket booked for Flight %s for passenger %s ",Num,name[pos]);
-            pos++;   
-        }
-        else{
-            flag = 0;
-            System.out.println("Theres no flight at this number.");
+        if(){
+
         }
         System.out.println();
         
     }
+    */
+    /* 
     public static void RemoveFlight(){
         Scanner remov = new Scanner(System.in);
         System.out.print("Enter the flight number to remove tickets: ");
@@ -162,9 +148,6 @@ public class Project{
     
 
 
-    public static void printall(String []b ,String []d ,String []c ,String []a ,String []j ,int[]o,int[]m){
-        for(int i = 0; i<index;i++){
-            System.out.print(b[i] +" "+ d[i]+" "+c[i] +""+ a[i] + " "+j[i]+" "+o[i]+" "+ m[i]+"  "+"\n");
-        }
+   
     }*/   
 }
