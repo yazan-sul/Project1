@@ -18,7 +18,7 @@ public class Flight{
         this.ticketPrice = ticketPrice;
     }
     public  boolean hasTickets(){
-        if(numOfTickets>0){
+        if(numOfTickets!=0){
             return true;
         }
         else 

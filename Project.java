@@ -86,10 +86,10 @@ public class Project{
         System.out.println();
         System.out.println("Enter the flight number to book tickets: ");
         String Num = Book.nextLine();
-        if(bokSystem.flightExists(Num)){
+        if(bokSystem.flightExist(Num)!=null){
             System.out.print("Enter passnger name: ");
-            String name = Book.nextLine();
             Flight flight = bokSystem.flightExist(Num);
+            String name = Book.nextLine();
             System.out.println("Ticket booked for flight "+Num+" for passnger "+ name);
 
             return flight.bookTicket(name);

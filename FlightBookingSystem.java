@@ -10,20 +10,21 @@ public class FlightBookingSystem{
 
     public Flight flightExist(String flightNUM){
         for(int i =0;i<count;i++){
-            if(flightNUM == flights[i].getflightNum())
+            if(flightNUM.equals(flights[i].getflightNum())){
                 return flights[i];
             }
+        }
         return null;
     }   
 
-    public boolean flightExists(String flightNUM){
+   /*  public boolean flightExists(String flightNUM){
         for(int i =0;i<count;i++){
             if(flightNUM == flights[i].getflightNum())
 
                 return true;
         }
-        return false;
-    }   
+        return null;
+    }   */
 
     public void addTicket(Ticket ticket){
         tickets[count1] = ticket;
