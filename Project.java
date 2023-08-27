@@ -24,8 +24,8 @@ public class Project{
                 boksystem.addFlight(flight);
             }
             else if (choice ==2){
-                boksystem.addTicket();
-               // BookFlight();
+                Ticket ticket = BookFlight(boksystem);
+                boksystem.addTicket(ticket);
 
             }
             else if (choice == 3){
@@ -84,19 +84,19 @@ public class Project{
     public static Ticket BookFlight(FlightBookingSystem bokSystem){
         Scanner Book = new Scanner(System.in);
         System.out.println();
-        int flag = 0;
         System.out.println("Enter the flight number to book tickets: ");
         String Num = Book.nextLine();
         if(bokSystem.flightExists(Num)){
             System.out.print("Enter passnger name: ");
             String name = Book.nextLine();
-            return new Ticket(name, Num);
+            Flight flight = bokSystem.flightExist(Num);
+            System.out.println("Ticket booked for flight "+Num+" for passnger "+ name);
+
+            return flight.bookTicket(name);
         }
         
 
-        
-        System.out.println();
-        
+        return null;        
     }
     
     /* 

@@ -7,11 +7,6 @@ public class Ticket{
         this.custmorName = custmorName;
         this.flight = flight;
     }
-    public Ticket(String custmorName,String flightNum){
-        this.custmorName = custmorName;
-        this.flightNum = flight.getflightNum();
-
-    }
     public void updateCustomerName(String custmorName){
         this.custmorName = custmorName;
     }
