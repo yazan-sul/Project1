@@ -11,9 +11,9 @@ public class FlightBookingSystem{
     public boolean flightExists(String flightNUM){
         for(int i =0;i<count;i++){
             if(flightNUM == flights[i].getflightNum())
-                return false;
+                return true;
         }
-        return true;
+        return false;
     }   
 
     public void addTicket(Ticket ticket){

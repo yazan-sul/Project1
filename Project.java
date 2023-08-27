@@ -24,8 +24,7 @@ public class Project{
                 boksystem.addFlight(flight);
             }
             else if (choice ==2){
-                Ticket ticket;
-                boksystem.addTicket(t);
+                boksystem.addTicket();
                // BookFlight();
 
             }
@@ -82,17 +81,16 @@ public class Project{
 
     }
 
-    public void BookFlight(){
+    public static Ticket BookFlight(FlightBookingSystem bokSystem){
         Scanner Book = new Scanner(System.in);
         System.out.println();
         int flag = 0;
         System.out.println("Enter the flight number to book tickets: ");
         String Num = Book.nextLine();
-
-        if(flightExists(Num)){
+        if(bokSystem.flightExists(Num)){
             System.out.print("Enter passnger name: ");
             String name = Book.nextLine();
-            
+            return new Ticket(name, Num);
         }
         
 
