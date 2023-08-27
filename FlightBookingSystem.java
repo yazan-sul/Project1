@@ -1,4 +1,11 @@
 public class FlightBookingSystem{
+    private int count=0;
+    public Flight[] flights = new Flight[100];
+
+    public void addFlight(Flight flight){
+        flights[count] = flight;
+        count++;
+    }
 
 
     public static void Menu(){

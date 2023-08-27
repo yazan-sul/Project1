@@ -1,19 +1,6 @@
 import java.util.Scanner;
 import java.util.Date;
 public class Project{
-    static int Size = 100;
-    static int index = 0;
-    static int pos = 0;
-
-    static String flightNum[] = new String[Size];
-    static String destination[] = new String[Size];
-    static String OriginAirport[] = new String[Size];
-    static String []departureDate = new String[Size];
-    static String []departureTime = new String[Size];
-    static String []name = new String[Size];
-
-    static int []numOfTickets = new int[Size];
-    static int []ticketPrice = new int[Size];
     
     public static void main(String[] args) {
         System.out.println("Flight Ticket Booking System");
@@ -21,41 +8,36 @@ public class Project{
         System.out.println("1. Add New Flight\n"+ "2. Book Ticket\n"+ "3. Update Ticket\n"+ "4. Remove Ticket\n" + "5. Print Booked Passengers\n"+ "6. Display Available Flights\n" +"7. Exit");
         int choice=0;
         Scanner input = new Scanner(System.in);
+        FlightBookingSystem boksystem = new FlightBookingSystem();
         System.out.println();
         while(choice != 7){
+        FlightBookingSystem.Menu();
 	    System.out.print("Enter your choice: ");	
             choice = input.nextInt();    
             System.out.println();
 
 
             if(choice == 1){
-                AddFlight();
-                Size++;
- 		Menu();
+                Flight flight = readFlight();
+                boksystem.addFlight(flight);
             }
             else if (choice ==2){
-                BookFlight();
- 		Menu();
+               // BookFlight();
 
             }
             else if (choice == 3){
-                UpdateFlight();
- 		Menu();
+               // UpdateFlight();
 
             }
             else if (choice == 4){
-                RemoveFlight();
- 		Menu();
+                // RemoveFlight();
             }
             else if (choice == 5){
-                PrintBookedPassengers();
- 		Menu();
+                // PrintBookedPassengers();
 
             }
             else if (choice == 6){
-                printall(flightNum, destination, departureTime, departureDate, OriginAirport, numOfTickets, numOfTickets);
                 
- 		Menu();
             
 	    }
             else if (choice == 7){
@@ -64,31 +46,31 @@ public class Project{
             }
             else{
                 System.out.println("no such operation! Please try again.\n");                
-                Menu();
 		continue;
             }
         }
     }   
-    public static void AddFlight(){
+    public static Flight readFlight(){
         
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter flight number: ");
-        flightNum[index] = sc.nextLine();
+        String flightNUM = sc.nextLine();
         System.out.print("Enter origin airport: ");
-        destination[index] = sc.nextLine();
+        String destination = sc.nextLine();
         System.out.print("Enter destination airport: ");
-        OriginAirport[index] = sc.nextLine();
+        String OriginAirport = sc.nextLine();
         System.out.print("Enter departure date: ");
-        departureDate[index] = sc.nextLine();
+        String departureDate = sc.nextLine();
         System.out.print("Enter departure time: ");
-        departureTime[index] = sc.nextLine();
+        String departureTime = sc.nextLine();
         System.out.print("Enter total number of tickets: ");
-        numOfTickets[index] = sc.nextInt();
+        int numOfTickets = sc.nextInt();
         System.out.print("Enter ticket price: ");
-        ticketPrice[index] = sc.nextInt();
+        int ticketPrice = sc.nextInt();
         System.out.print("Flight added successfully!");
-        index++;
+        
         System.out.println();
+        return new Flight(flightNUM, destination, OriginAirport, departureDate, departureTime, numOfTickets, ticketPrice);
     }
     public static void UpdateFlight(){
         System.out.println("== Update Ticket ==\nDummy method to update a ticket.");
@@ -96,11 +78,11 @@ public class Project{
 
 
     }
-    public static void BookFlight(){
+   /*  public static void BookFlight(){
         Scanner Book = new Scanner(System.in);
-        System.out.println(index);
+        System.out.println();
         int flag = 0;
-        for(int i = 0;i<index;i++){
+        for(int i = 0;i<3;i++){
             
             System.out.println(flightNum[i]);
         }
@@ -184,5 +166,5 @@ public class Project{
         for(int i = 0; i<index;i++){
             System.out.print(b[i] +" "+ d[i]+" "+c[i] +""+ a[i] + " "+j[i]+" "+o[i]+" "+ m[i]+"  "+"\n");
         }
-    }   
+    }*/   
 }

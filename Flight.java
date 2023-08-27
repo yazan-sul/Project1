@@ -6,6 +6,7 @@ public class Flight{
     private String departureTime;
     private int numOfTickets;
     private int ticketPrice;
+
     public Flight(String flightNum,String destination,String originAirport,String departureDate,String departureTime,int numOfTickets,int ticketPrice)
     {
         this.flightNum = flightNum;
@@ -23,7 +24,8 @@ public class Flight{
         else 
             return false;
     }
-    public void oneTicket(){
-        numOfTickets--;
+    public Ticket bookTicket(String name){
+        this.numOfTickets--;
+        return new Ticket(name,this);
     }
 }
