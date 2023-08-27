@@ -38,4 +38,7 @@ public class Flight{
     public String toString(){
         return flightNum;
     }
+    public String getflightNum(){
+        return flightNum;
+    }
 }

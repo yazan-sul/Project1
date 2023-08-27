@@ -7,7 +7,15 @@ public class FlightBookingSystem{
         flights[count] = flight;
         count++;
     }
-        
+
+    public boolean flightExists(String flightNUM){
+        for(int i =0;i<count;i++){
+            if(flightNUM == flights[i].getflightNum())
+                return false;
+        }
+        return true;
+    }   
+
     public void addTicket(Ticket ticket){
         tickets[count1] = ticket;
         count1++;
