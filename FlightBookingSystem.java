@@ -24,9 +24,11 @@ public class FlightBookingSystem{
 
     public void printAvailableFlights(){
         for(int i=0;i<flights.length;i++){
-            if(this.hasTickets()){
+            if(flights[i].hasTickets()){
                 System.out.println(flights[i]);
             }
+            else 
+                continue;
         }
     }
 }

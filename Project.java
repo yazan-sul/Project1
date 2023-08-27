@@ -21,9 +21,10 @@ public class Project{
             if(choice == 1){
                 Flight flight = readFlight();
                 boksystem.addFlight(flight);
-                boksystem.printAvailableFlights();
             }
             else if (choice ==2){
+                boksystem.printAvailableFlights();
+
                // BookFlight();
 
             }
