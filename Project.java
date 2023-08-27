@@ -9,7 +9,9 @@ public class Project{
         System.out.println("1. Add New Flight\n"+ "2. Book Ticket\n"+ "3. Update Ticket\n"+ "4. Remove Ticket\n" + "5. Print Booked Passengers\n"+ "6. Display Available Flights\n" +"7. Exit");
         int choice=0;
         Scanner input = new Scanner(System.in);
+
         FlightBookingSystem boksystem = new FlightBookingSystem();
+        
         System.out.println();
         while(choice != 7){
         FlightBookingSystem.Menu();
@@ -17,14 +19,13 @@ public class Project{
             choice = input.nextInt();    
             System.out.println();
 
-
             if(choice == 1){
                 Flight flight = readFlight();
                 boksystem.addFlight(flight);
             }
             else if (choice ==2){
-                boksystem.printAvailableFlights();
-
+                Ticket ticket;
+                boksystem.addTicket(t);
                // BookFlight();
 
             }
@@ -40,9 +41,8 @@ public class Project{
 
             }
             else if (choice == 6){
-                
-            
-	    }
+                boksystem.printAvailableFlights();
+	        }
             else if (choice == 7){
                 System.out.println("Thank you for using the Flight Ticket Booking System. Goodbye!");
                 break;
@@ -81,19 +81,25 @@ public class Project{
 
 
     }
-/* 
+
     public void BookFlight(){
         Scanner Book = new Scanner(System.in);
         System.out.println();
         int flag = 0;
         System.out.println("Enter the flight number to book tickets: ");
         String Num = Book.nextLine();
+
+        if(flightExists(Num)){
+            System.out.print("Enter passnger name: ");
+            String name = Book.nextLine();
+            
+        }
         
 
         
         System.out.println();
         
-    }*/
+    }
     
     /* 
     public static void RemoveFlight(){
