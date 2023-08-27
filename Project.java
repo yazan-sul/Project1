@@ -81,20 +81,20 @@ public class Project{
 
 
     }
-    
-    /*public void BookFlight(){
+/* 
+    public void BookFlight(){
         Scanner Book = new Scanner(System.in);
         System.out.println();
         int flag = 0;
         System.out.println("Enter the flight number to book tickets: ");
         String Num = Book.nextLine();
-        if(){
+        
 
-        }
+        
         System.out.println();
         
-    }
-    */
+    }*/
+    
     /* 
     public static void RemoveFlight(){
         Scanner remov = new Scanner(System.in);

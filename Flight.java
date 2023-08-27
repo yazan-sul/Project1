@@ -36,6 +36,6 @@ public class Flight{
         }
     }    
     public String toString(){
-        return flightNum + destination + originAirport +departureDate +departureTime;
+        return flightNum;
     }
 }

@@ -7,7 +7,7 @@ public class FlightBookingSystem{
         flights[count] = flight;
         count++;
     }
-    
+        
     public void addTicket(Ticket ticket){
         tickets[count1] = ticket;
         count1++;
@@ -23,7 +23,7 @@ public class FlightBookingSystem{
     }
 
     public void printAvailableFlights(){
-        for(int i=0;i<flights.length;i++){
+        for(int i=0;i<count;i++){
             if(flights[i].hasTickets()){
                 System.out.println(flights[i]);
             }
