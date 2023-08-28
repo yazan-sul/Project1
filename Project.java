@@ -112,9 +112,10 @@ public class Project{
 
             return flight.bookTicket(name);
         }
-        
+        else{
+            System.out.println("Error: wrong flight number.");
 
-        return null;        
+            return null;}        
     }
     public static void cancelTicket(FlightBookingSystem bokSystem){
         Scanner scanForRemove = new Scanner(System.in);
