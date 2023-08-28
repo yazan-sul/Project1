@@ -29,8 +29,8 @@ public class Project{
 
             }
             else if (choice == 3){
-               // UpdateFlight();
-
+                 UpdateFlight(boksystem);
+                // boksystem.addTicket(ticket);
             }
             else if (choice == 4){
                 // RemoveFlight();
@@ -79,21 +79,22 @@ public class Project{
     public static void UpdateFlight(FlightBookingSystem bokSystem){
         Scanner scanForUpdate = new Scanner(System.in);
 
-        System.out.println("Enter the flight number to remove ticket: ");
+        System.out.println("Enter the flight number to update ticket: ");
         String flightNum = scanForUpdate.next();
         if(bokSystem.flightExists(flightNum)){
             System.out.println("Enter passenger name to update ticket: ");
             String name = scanForUpdate.next();
-            if(bokSystem.nameExists(name) != null){
+            Ticket ticket = bokSystem.findTicket(name);
+            if(ticket != null){
                 System.out.println("Enter new passenger name: ");
                 String newName = scanForUpdate.next();
-                Ticket ticket = bokSystem.nameExists(newName);
-                int ind = bokSystem.indexOfName(name);
+                // int ind = bokSystem.indexOfName(name);
                 ticket.setName(newName);
+
+
             }
         }
-        System.out.println();
-        
+
     }
 
     public static Ticket BookFlight(FlightBookingSystem bokSystem){
