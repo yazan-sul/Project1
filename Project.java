@@ -115,21 +115,30 @@ public class Project{
 
         return null;        
     }
-    public  Ticket RemoveFlight(FlightBookingSystem bokSystem){
+    public static Ticket RemoveFlight(FlightBookingSystem bokSystem){
         Scanner scanForRemove = new Scanner(System.in);
         System.out.println("Enter the flight number to remove ticket: ");
         String flightNum = scanForRemove.next();
         if(bokSystem.flightExist(flightNum) != null){
             System.out.println("Enter passenger name to remove ticket: ");
             String newName = scanForRemove.next();
-            int i = bokSystem.indexOfName(newName);
+            int ind = bokSystem.indexOfName(newName); 
+            for(int i = ind; i<bokSystem.tickets.length;i++){
+                for(int j = ind+1; j<bokSystem.tickets.length;j++){
+                    Ticket temp = bokSystem.tickets[ind];
+                    bokSystem.tickets[i] = bokSystem.tickets[j];
+                    bokSystem.tickets[j] = temp;
+                
+                }   
+            }
             Flight flight=bokSystem.flightExist(flightNum);
             return flight.deleteTicket(newName);
 
         }
-        else
+        else{
             System.out.println("Error: there no flight at this number.");
             return null;
+        }
     }
     
     /* 

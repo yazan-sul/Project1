@@ -36,7 +36,7 @@ public class FlightBookingSystem{
         }
         return null;
     }
-    
+
     public boolean isTicket(Ticket ticket,String flightNum ){
         if(ticket.getFlightNum().equals(flightNum))
             return true;
@@ -64,7 +64,7 @@ public class FlightBookingSystem{
     }
 
     public void removTicket(Ticket ticket){
-        tickets[count1] = null;
+        tickets[count1] = ticket;
         count1--;
     }
 
