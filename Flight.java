@@ -33,15 +33,14 @@ public class Flight{
         else
         {
             System.out.println("no tickets available");
-            return new Ticket(null, null);
+            return null;
         }
     }
 
-    public Ticket deleteTicket(String name){
+    public void deleteTicket(){
         this.numOfTickets++;
-        return new Ticket(null, this);
     }    
-    
+
     public String toString(){
         return "Flight Number: "+flightNum+"\nOrigin: "+this.originAirport + "\nDestination: "+ this.destination+ "\nDeparture Date: "+ departureDate+ "\nDeparture Time: "+departureTime+ "\nAvailable Tickets: "+ numOfTickets+ "\nTicket Price: $"+ ticketPrice;
     }

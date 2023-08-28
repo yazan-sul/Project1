@@ -24,19 +24,20 @@ public class Project{
                 boksystem.addFlight(flight);
             }
             else if (choice ==2){
-                Ticket ticket = BookFlight(boksystem);
+                Ticket ticket = bookFlight(boksystem);
 
                 boksystem.addTicket(ticket);
 
             }
             else if (choice == 3){
+                
                  UpdateFlight(boksystem);
                 // boksystem.addTicket(ticket);
             }
             else if (choice == 4){
-                Ticket ticket = RemoveFlight(boksystem);
+                cancelTicket(boksystem);
+                // int indexToRemove = boksystem.indexOfName(null);
 
-                boksystem.removTicket(ticket);
             }
             else if (choice == 5){
                 System.out.print("Enter the flight number to view booked passengers: " );
@@ -98,7 +99,7 @@ public class Project{
             }
         }
     }
-    public static Ticket BookFlight(FlightBookingSystem bokSystem){
+    public static Ticket bookFlight(FlightBookingSystem bokSystem){
         Scanner Book = new Scanner(System.in);
         System.out.println();
         System.out.println("Enter the flight number to book tickets: ");
@@ -115,75 +116,20 @@ public class Project{
 
         return null;        
     }
-    public static Ticket RemoveFlight(FlightBookingSystem bokSystem){
+    public static void cancelTicket(FlightBookingSystem bokSystem){
         Scanner scanForRemove = new Scanner(System.in);
         System.out.println("Enter the flight number to remove ticket: ");
         String flightNum = scanForRemove.next();
         if(bokSystem.flightExist(flightNum) != null){
             System.out.println("Enter passenger name to remove ticket: ");
             String newName = scanForRemove.next();
-            int ind = bokSystem.indexOfName(newName); 
-            for(int i = ind; i<bokSystem.tickets.length;i++){
-                for(int j = ind+1; j<bokSystem.tickets.length;j++){
-                    Ticket temp = bokSystem.tickets[ind];
-                    bokSystem.tickets[i] = bokSystem.tickets[j];
-                    bokSystem.tickets[j] = temp;
-                
-                }   
-            }
-            Flight flight=bokSystem.flightExist(flightNum);
-            return flight.deleteTicket(newName);
-
+            bokSystem.cancelTicket(flightNum, newName);
         }
         else{
             System.out.println("Error: there no flight at this number.");
-            return null;
         }
     }
     
-    /* 
-    public static void RemoveFlight(){
-        Scanner remov = new Scanner(System.in);
-        System.out.print("Enter the flight number to remove tickets: ");
-        String Num = remov.nextLine();
-        int flag =0, flag2=0,reminder=0;
-        for(int i = 0;i<index;i++){
-            if(Num.equals(flightNum[i])){
-                flag=1;
-                break;
-            }
-        }
-        if(flag ==1){
-            System.out.print("Enter passenger name to remove: ");
-            String pas = remov.nextLine();
-            for(int i = 0;i<pos;i++){
-                if(pas.equals(name[i])){
-                    flag2=1;
-                    reminder = i;
-                    break;
-                }
-            }
-            if(flag2 == 1){
-                for(int i = reminder;i<pos;i++){
-                    for(int j=reminder+1;j<pos;j++){
-                        String temp = name[i];
-                        name[i] = name[j];
-                        name[j] = temp;
-                    }
-                }
-                System.out.println("removed");
-                pos--;
-            }
-        }
-        else    
-            System.out.println("theres no flight at this num.");
-        System.out.println();
-    
-    }*/
-    /*public static void DisplayAvailableFlights(){
-        System.out.println("== Display Available Flights ==\nDummy method to display available flights.");
-        System.out.println();
+  
 
-    }*/
-      
 }

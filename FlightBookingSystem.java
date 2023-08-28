@@ -4,7 +4,7 @@ public class FlightBookingSystem{
     private int count=0,count1;
     public Flight[] flights = new Flight[100];
     public Ticket[] tickets = new Ticket[100];
-
+    
     public void addFlight(Flight flight){
         flights[count] = flight;
         count++;
@@ -43,13 +43,14 @@ public class FlightBookingSystem{
         return false;
     }
 
-    public int indexOfName(String name){
+    public int indexOfTicket(String name,String flightNum){
         for(int i=0; i<count1;i++){
             if(name.equals(tickets[i].getName()))
                 return i;
         }
         return -1;
     }
+
     public int indexOfFlight(String name){
         for(int i=0; i<count;i++){
             if(name.equals(flights[i].getflightNum()))
@@ -63,9 +64,22 @@ public class FlightBookingSystem{
         count1++;
     }
 
-    public void removTicket(Ticket ticket){
-        tickets[count1] = ticket;
+    public void removTicket(int indexToRemove){
+        tickets[indexToRemove] = tickets[count1];
         count1--;
+    }
+
+    public void cancelTicket(String flightNum, String name){
+        int i = indexOfTicket(name, flightNum);
+        if(i == -1)
+            System.out.println("No such ticket");
+        else {
+            tickets[i].cancel();
+            count1--;
+            tickets[i] = tickets[count1];
+            tickets[count1] = null;
+
+        }
     }
 
     public static void Menu(){
@@ -90,6 +104,9 @@ public class FlightBookingSystem{
         }
     }
 
+    public int getCount1(){
+        return count1;
+    }
     public void printAvailableFlights(){
         if(count <=0)
             System.out.println("Error: theres no flights.");

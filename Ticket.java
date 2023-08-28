@@ -23,4 +23,7 @@ public class Ticket{
     public String getFlightNum(){
         return this.flight.getflightNum();
     }
+    public void cancel(){
+        this.flight.deleteTicket();
+    }
 }
