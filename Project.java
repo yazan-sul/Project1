@@ -5,8 +5,8 @@ public class Project{
     
     public static void main(String[] args) {
         System.out.println("Flight Ticket Booking System");
-        System.out.println();
-        System.out.println("1. Add New Flight\n"+ "2. Book Ticket\n"+ "3. Update Ticket\n"+ "4. Remove Ticket\n" + "5. Print Booked Passengers\n"+ "6. Display Available Flights\n" +"7. Exit");
+        //System.out.println();
+        //System.out.println("1. Add New Flight\n"+ "2. Book Ticket\n"+ "3. Update Ticket\n"+ "4. Remove Ticket\n" + "5. Print Booked Passengers\n"+ "6. Display Available Flights\n" +"7. Exit");
         int choice=0;
         Scanner input = new Scanner(System.in);
 
@@ -36,8 +36,10 @@ public class Project{
                 // RemoveFlight();
             }
             else if (choice == 5){
+                System.out.print("Enter the flight number to view booked passengers: " );
+                String NumOfFLIGHT = input.next();
+                boksystem.PrintBookedPassengers(NumOfFLIGHT);
                 // PrintBookedPassengers();
-
             }
             else if (choice == 6){
                 boksystem.printAvailableFlights();

@@ -25,7 +25,7 @@ public class Flight{
             return false;
     }
     public Ticket bookTicket(String name){
-        if(hasTickets()){
+        if(this.hasTickets()){
             this.numOfTickets--;
             return new Ticket(name,this);
         }

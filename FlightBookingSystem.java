@@ -40,6 +40,16 @@ public class FlightBookingSystem{
             System.out.println(flight);
     }
 
+    public void PrintBookedPassengers(String flightNum){
+        for(int i =0;i<count;i++){
+            if(flightNum.equals(flights[i].getflightNum())){
+                System.out.println("Booked Passengers for Flight "+flightNum+":");
+                for(int j=0;j<count1;j++)
+                    System.out.println("Passenger Name: "+tickets[j]);
+            }
+        }
+    }
+
     public void printAvailableFlights(){
         for(int i=0;i<count;i++){
             if(flights[i].hasTickets()){
