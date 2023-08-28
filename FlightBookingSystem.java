@@ -17,14 +17,39 @@ public class FlightBookingSystem{
         return null;
     }   
 
-   /*  public boolean flightExists(String flightNUM){
+    public boolean flightExists(String flightNUM){
         for(int i =0;i<count;i++){
             if(flightNUM == flights[i].getflightNum())
 
                 return true;
         }
+        return false;
+    }  
+    public Ticket nameExists(String name){
+        for(int i=0; i<count1;i++){
+            if(name == tickets[i].getName())
+                return tickets[i];
+        }
         return null;
-    }   */
+    }
+    public int indexOfName(String name){
+        for(int i=0; i<count1;i++){
+            if(name == tickets[i].getName())
+                return i;
+        }
+        return -1;
+    }
+    public void RemoveFlight(String flightNUM){
+        if(flightExists(flightNUM)){
+            System.out.println("Enter passenger name to update ticket: ");
+
+        }
+    }
+
+    public Ticket newName(String newName,int index){
+        tickets[index].getName() = newName;
+        return tickets[index];
+    }
 
     public void addTicket(Ticket ticket){
         tickets[count1] = ticket;

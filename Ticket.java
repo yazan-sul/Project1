@@ -13,6 +13,11 @@ public class Ticket{
     public String toString(){
         return  custmorName; 
     }
-
-
+        
+    public String getName(){
+        return custmorName;
+    }
+    public void setName(String newName){
+        this.custmorName = newName;
+    }
 }

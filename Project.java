@@ -76,11 +76,24 @@ public class Project{
         System.out.println();
         return new Flight(flightNUM, destination, OriginAirport, departureDate, departureTime, numOfTickets, ticketPrice);
     }
-    public static void UpdateFlight(){
-        System.out.println("== Update Ticket ==\nDummy method to update a ticket.");
+    public static void UpdateFlight(FlightBookingSystem bokSystem){
+        Scanner scanForUpdate = new Scanner(System.in);
+
+        System.out.println("Enter the flight number to remove ticket: ");
+        String flightNum = scanForUpdate.next();
+        if(bokSystem.flightExists(flightNum)){
+            System.out.println("Enter passenger name to update ticket: ");
+            String name = scanForUpdate.next();
+            if(bokSystem.nameExists(name) != null){
+                System.out.println("Enter new passenger name: ");
+                String newName = scanForUpdate.next();
+                Ticket ticket = bokSystem.nameExists(newName);
+                int ind = bokSystem.indexOfName(name);
+                ticket.setName(newName);
+            }
+        }
         System.out.println();
-
-
+        
     }
 
     public static Ticket BookFlight(FlightBookingSystem bokSystem){
@@ -139,23 +152,11 @@ public class Project{
             System.out.println("theres no flight at this num.");
         System.out.println();
     
-    }
-    public static void DisplayAvailableFlights(){
+    }*/
+    /*public static void DisplayAvailableFlights(){
         System.out.println("== Display Available Flights ==\nDummy method to display available flights.");
         System.out.println();
 
-    }
-    public static void PrintBookedPassengers(){
-        Scanner bookPass = new Scanner(System.in);
-        System.out.print("Enter the flight number to view booked passengers: ");
-        String Num = bookPass.nextLine();
-
-        System.out.println();
-
-    }
-    
-
-
-   
-    }*/   
+    }*/
+      
 }
