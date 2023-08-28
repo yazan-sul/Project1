@@ -25,6 +25,7 @@ public class Project{
             }
             else if (choice ==2){
                 Ticket ticket = BookFlight(boksystem);
+
                 boksystem.addTicket(ticket);
 
             }
@@ -33,7 +34,9 @@ public class Project{
                 // boksystem.addTicket(ticket);
             }
             else if (choice == 4){
-                // RemoveFlight();
+                Ticket ticket = RemoveFlight(boksystem);
+
+                boksystem.removTicket(ticket);
             }
             else if (choice == 5){
                 System.out.print("Enter the flight number to view booked passengers: " );
@@ -76,6 +79,8 @@ public class Project{
         System.out.println();
         return new Flight(flightNUM, destination, OriginAirport, departureDate, departureTime, numOfTickets, ticketPrice);
     }
+
+    
     public static void UpdateFlight(FlightBookingSystem bokSystem){
         Scanner scanForUpdate = new Scanner(System.in);
 
@@ -84,19 +89,15 @@ public class Project{
         if(bokSystem.flightExists(flightNum)){
             System.out.println("Enter passenger name to update ticket: ");
             String name = scanForUpdate.next();
-            Ticket ticket = bokSystem.findTicket(name);
-            if(ticket != null){
+            Ticket ticket = bokSystem.findTicket(name,flightNum);
+            if(ticket != null ){
                 System.out.println("Enter new passenger name: ");
                 String newName = scanForUpdate.next();
                 // int ind = bokSystem.indexOfName(name);
                 ticket.setName(newName);
-
-
             }
         }
-
     }
-
     public static Ticket BookFlight(FlightBookingSystem bokSystem){
         Scanner Book = new Scanner(System.in);
         System.out.println();
@@ -113,6 +114,22 @@ public class Project{
         
 
         return null;        
+    }
+    public  Ticket RemoveFlight(FlightBookingSystem bokSystem){
+        Scanner scanForRemove = new Scanner(System.in);
+        System.out.println("Enter the flight number to remove ticket: ");
+        String flightNum = scanForRemove.next();
+        if(bokSystem.flightExist(flightNum) != null){
+            System.out.println("Enter passenger name to remove ticket: ");
+            String newName = scanForRemove.next();
+            int i = bokSystem.indexOfName(newName);
+            Flight flight=bokSystem.flightExist(flightNum);
+            return flight.deleteTicket(newName);
+
+        }
+        else
+            System.out.println("Error: there no flight at this number.");
+            return null;
     }
     
     /* 

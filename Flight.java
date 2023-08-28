@@ -25,6 +25,7 @@ public class Flight{
             return false;
     }
     public Ticket bookTicket(String name){
+        
         if(this.hasTickets()){
             this.numOfTickets--;
             return new Ticket(name,this);
@@ -34,9 +35,15 @@ public class Flight{
             System.out.println("no tickets available");
             return new Ticket(null, null);
         }
+    }
+
+    public Ticket deleteTicket(String name){
+        this.numOfTickets++;
+        return new Ticket(null, this);
     }    
+    
     public String toString(){
-        return flightNum;
+        return "Flight Number: "+flightNum+"\nOrigin: "+this.originAirport + "\nDestination: "+ this.destination+ "\nDeparture Date: "+ departureDate+ "\nDeparture Time: "+departureTime+ "\nAvailable Tickets: "+ numOfTickets+ "\nTicket Price: $"+ ticketPrice;
     }
     public String getflightNum(){
         return flightNum;

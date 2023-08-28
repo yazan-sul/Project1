@@ -20,4 +20,7 @@ public class Ticket{
     public void setName(String newName){
         this.custmorName = newName;
     }
+    public String getFlightNum(){
+        return this.flight.getflightNum();
+    }
 }

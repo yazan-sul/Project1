@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class FlightBookingSystem{
     private int count=0,count1;
     public Flight[] flights = new Flight[100];
@@ -8,6 +10,7 @@ public class FlightBookingSystem{
         count++;
     }
 
+    
     public Flight flightExist(String flightNUM){
         for(int i =0;i<count;i++){
             if(flightNUM.equals(flights[i].getflightNum())){
@@ -25,13 +28,21 @@ public class FlightBookingSystem{
         }
         return false;
     }  
-    public Ticket findTicket(String name){
+
+    public Ticket findTicket(String name,String flightNum){
         for(int i=0; i<count1;i++){
-            if(name.equals(tickets[i].getName()))
-                return tickets[i];
+            if (tickets[i].getName().equals(name) && tickets[i].getFlightNum().equals(flightNum))
+              return tickets[i];  
         }
         return null;
     }
+    
+    public boolean isTicket(Ticket ticket,String flightNum ){
+        if(ticket.getFlightNum().equals(flightNum))
+            return true;
+        return false;
+    }
+
     public int indexOfName(String name){
         for(int i=0; i<count1;i++){
             if(name.equals(tickets[i].getName()))
@@ -39,18 +50,22 @@ public class FlightBookingSystem{
         }
         return -1;
     }
-    
-    public void RemoveFlight(String flightNUM){
-        if(flightExists(flightNUM)){
-            System.out.println("Enter passenger name to update ticket: ");
-
+    public int indexOfFlight(String name){
+        for(int i=0; i<count;i++){
+            if(name.equals(flights[i].getflightNum()))
+                return i;
         }
+        return -1;
     }
-
 
     public void addTicket(Ticket ticket){
         tickets[count1] = ticket;
         count1++;
+    }
+
+    public void removTicket(Ticket ticket){
+        tickets[count1] = null;
+        count1--;
     }
 
     public static void Menu(){
@@ -62,23 +77,36 @@ public class FlightBookingSystem{
             System.out.println(flight);
     }
 
-    public void PrintBookedPassengers(String flightNum){
+    public void PrintBookedPassengers(String flightNum){ 
         for(int i =0;i<count;i++){
             if(flightNum.equals(flights[i].getflightNum())){
                 System.out.println("Booked Passengers for Flight "+flightNum+":");
                 for(int j=0;j<count1;j++)
-                    System.out.println("Passenger Name: "+tickets[j]);
+                    if(flightNum.equals(tickets[j].getFlightNum()))
+                        System.out.println("Passenger Name: "+tickets[j]);
             }
+            else 
+                System.out.println("Error: no flight at this number.");
         }
     }
 
     public void printAvailableFlights(){
-        for(int i=0;i<count;i++){
-            if(flights[i].hasTickets()){
-                System.out.println(flights[i]);
+        if(count <=0)
+            System.out.println("Error: theres no flights.");
+
+        else{
+            System.out.println("Available Flights:");
+            for(int i=0;i<count;i++){
+                if(flights[i].hasTickets()){
+                    System.out.println(flights[i]);
+                    System.out.println("------------------------------");
+
+                }
+                else 
+                    continue;
             }
-            else 
-                continue;
         }
+
+
     }
 }
