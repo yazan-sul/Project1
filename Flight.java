@@ -47,4 +47,7 @@ public class Flight{
     public String getflightNum(){
         return flightNum;
     }
+    public int getNumOfTickets(){
+        return numOfTickets;
+    }
 }

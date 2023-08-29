@@ -26,4 +26,7 @@ public class Ticket{
     public void cancel(){
         this.flight.deleteTicket();
     }
+    public int getNumOfTicketsFromFlight(){
+        return this.flight.getNumOfTickets();
+    }
 }

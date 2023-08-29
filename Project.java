@@ -21,13 +21,16 @@ public class Project{
 
             if(choice == 1){
                 Flight flight = readFlight();
-                boksystem.addFlight(flight);
+                if(boksystem.flightExists(flight.getflightNum()) == false)
+                    boksystem.addFlight(flight);
+                else 
+                    System.out.println("Error: theres a flight at this number.");
             }
             else if (choice ==2){
                 Ticket ticket = bookFlight(boksystem);
-
-                boksystem.addTicket(ticket);
-
+                    boksystem.addTicket(ticket);
+                
+                
             }
             else if (choice == 3){
                 
@@ -97,6 +100,11 @@ public class Project{
                 // int ind = bokSystem.indexOfName(name);
                 ticket.setName(newName);
             }
+            else
+                System.out.println("Error: no ticket at this name.");
+        }
+        else{
+            System.out.println("Error: theres no flight at this num.");
         }
     }
     public static Ticket bookFlight(FlightBookingSystem bokSystem){
@@ -105,12 +113,17 @@ public class Project{
         System.out.println("Enter the flight number to book tickets: ");
         String Num = Book.nextLine();
         if(bokSystem.flightExist(Num)!=null){
-            System.out.print("Enter passnger name: ");
             Flight flight = bokSystem.flightExist(Num);
-            String name = Book.nextLine();
-            System.out.println("Ticket booked for flight "+Num+" for passnger "+ name);
-
-            return flight.bookTicket(name);
+            if(flight.hasTickets() == true){
+                System.out.print("Enter passnger name: ");
+                String name = Book.nextLine();
+                System.out.println("Ticket booked for flight "+Num+" for passnger "+ name);
+                return flight.bookTicket(name);
+            }
+            else {
+                System.out.print("Error: no tickets avilable. ");
+                return null;
+            }
         }
         else{
             System.out.println("Error: wrong flight number.");
