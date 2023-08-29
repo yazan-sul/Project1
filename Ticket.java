@@ -12,6 +12,9 @@ public class Ticket{
     public String getName(){
         return custmorName;
     }
+    public String toString(){
+        return custmorName;
+    }
     // setter for custmorName
     public void setName(String newName){
         this.custmorName = newName;

@@ -36,7 +36,8 @@ public class Project{
                 // declearing an object type ticket that book a ticket
                 Ticket ticket = bookFlight(boksystem);
                 // callin addticket from object giving it a ticket type to add the ticket in the array of tickets
-                boksystem.addTicket(ticket);
+                if(ticket != null)
+                    boksystem.addTicket(ticket);
             }
             // it allow to change name to new name
             else if (choice == 3){
