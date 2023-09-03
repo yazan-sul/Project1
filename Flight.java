@@ -25,7 +25,7 @@ public class Flight{
         if(numOfTickets==0){
             throw new Exception("no tickets available");
         }
-        return false;
+        return true;
     }
     // method to book ticket it checks if the object have tickets left first then it book a ticket and store the ticket with the info of flight and its name
     public Ticket bookTicket(String name) throws Exception
