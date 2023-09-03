@@ -42,7 +42,7 @@ public class Project{
             // it allow to change name to new name
             else if (choice == 3){
                 // calling the method updateflight giving it object of FlightBookingSystem class
-                UpdateFlight(boksystem);
+                updateFlight(boksystem);
             }
             else if (choice == 4){
                 // calling the method cancelTicket giving it object of FlightBookingSystem class
@@ -53,7 +53,7 @@ public class Project{
                 // read a flight num from user
                 String NumOfFLIGHT = input.next();
                 //giving the object the flight num to check and print booked passengers
-                boksystem.PrintBookedPassengers(NumOfFLIGHT);
+                boksystem.printBookedPassengers(NumOfFLIGHT);
             }
             else if (choice == 6){
                 // print available flights that still have tickets
@@ -98,7 +98,7 @@ public class Project{
     }
 
     // method to update flight it takes object from type FlightBookingSystem
-    public static void UpdateFlight(FlightBookingSystem bokSystem){
+    public static void updateFlight(FlightBookingSystem bokSystem){
         // declearing a new scanner 
         Scanner scanForUpdate = new Scanner(System.in);
         System.out.println("Enter the flight number to update ticket: ");
@@ -116,6 +116,7 @@ public class Project{
                 // if ticket found it tell the user to enter the new name
                 String newName = scanForUpdate.next();
                 // change the name in the found ticket
+                System.out.println("Ticket updated for Flight "+ flightNum+" for passenger " + newName);
                 ticket.setName(newName);
             }
             else
@@ -136,29 +137,35 @@ public class Project{
         // read from user the flight num
         String Num = Book.nextLine();
         // check if flight num exist
-        if(bokSystem.flightExist(Num)!=null){
+        if(bokSystem.findFlight(Num)!=null){
             // declearing object type flight
-            Flight flight = bokSystem.flightExist(Num);
+            Flight flight = bokSystem.findFlight(Num);
             // check if the flight selected have tickets
-            if(flight.hasTickets() == true){
-                // if have tickets it read from user a name to book
-                System.out.print("Enter passnger name: ");
-                String name = Book.nextLine();
-                System.out.println("Ticket booked for flight "+Num+" for passnger "+ name);
-                // return a ticket with name booked in it
-                return flight.bookTicket(name);
+            try{
+                if(flight.hasTickets() == true){
+                    // if have tickets it read from user a name to book
+                    System.out.print("Enter passnger name: ");
+                    String name = Book.nextLine();
+                    System.out.println("Ticket booked for flight "+Num+" for passnger "+ name);
+                    // return a ticket with name booked in it
+                    return flight.bookTicket(name);
+                }
             }
-            else {
-                // if flight have no tickets left
+            catch(Exception e){
                 System.out.print("Error: no tickets avilable. ");
                 return null;
             }
+            // else {
+            //     // if flight have no tickets left
+            //     System.out.print("Error: no tickets avilable. ");
+            //     return null;
+            // }
         }
-        else{
+        
             // if user enter flight num that dosent exist
             System.out.println("Error: wrong flight number.");
             return null;
-        }        
+                
     }
     // method to remove a ticket from tickets
     public static void cancelTicket(FlightBookingSystem bokSystem){
@@ -168,7 +175,7 @@ public class Project{
         // read the flight num
         String flightNum = scanForRemove.next();
         // check if flight num exist
-        if(bokSystem.flightExist(flightNum) != null){
+        if(bokSystem.findFlight(flightNum) != null){
             System.out.println("Enter passenger name to remove ticket: ");
             // if flight exist it ask the user to enter a name to remove its ticket
             String name = scanForRemove.next();

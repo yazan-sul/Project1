@@ -20,25 +20,25 @@ public class Flight{
         this.ticketPrice = ticketPrice;
     }
     // boolean method to check if flight have tickets left it return true and if no it return false
-    public  boolean hasTickets(){
-        if(numOfTickets!=0){
-            return true;
+    public  boolean hasTickets() throws Exception
+    {
+        if(numOfTickets==0){
+            throw new Exception("no tickets available");
         }
-        else 
-            return false;
+        return false;
     }
     // method to book ticket it checks if the object have tickets left first then it book a ticket and store the ticket with the info of flight and its name
-    public Ticket bookTicket(String name){        
-        if(this.hasTickets()){
+    public Ticket bookTicket(String name) throws Exception
+    {        
+        if(this.hasTickets())
             this.numOfTickets--;
             return new Ticket(name,this);
-        }
-        else
-        {
-            System.out.println("no tickets available");
-            // return null if no tickets available
-            return null;
-        }
+        // else
+        // {
+        //     System.out.println("no tickets available");
+        //     // return null if no tickets available
+        //     return null;
+        // }
     }
     // method to add a ticket to its object when deleted 
     public void deleteTicket(){

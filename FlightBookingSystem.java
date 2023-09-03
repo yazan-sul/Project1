@@ -12,7 +12,7 @@ public class FlightBookingSystem{
         count++;
     }    
     // method to check if flight exist and return the flight that was searched for
-    public Flight flightExist(String flightNUM){
+    public Flight findFlight(String flightNUM){
         for(int i =0;i<count;i++){
             // check if flight exist by checking if the flight num equals flight num of one of the flights in the array
             if(flightNUM.equals(flights[i].getflightNum())){
@@ -23,7 +23,7 @@ public class FlightBookingSystem{
         return null;
     }   
     // boolean method to check if flight exists and return true or return flase if its not
-    public boolean flightExists(String flightNUM){
+    public boolean flightExists(String flightNUM){  
         for(int i =0;i<count;i++){
             // check if flight exist by checking if the flight num equals flight num of one of the flights in the array
             if(flightNUM.equals(flights[i].getflightNum()))
@@ -49,7 +49,7 @@ public class FlightBookingSystem{
     // return the index of ticket
     public int indexOfTicket(String name,String flightNum){
         for(int i=0; i<count1;i++){
-            if(name.equals(tickets[i].getName()))
+            if(name.equals(tickets[i].getName()) && flightNum.equals(tickets[i].getFlightNum()))
                 return i;
         }
         return -1;
@@ -90,7 +90,7 @@ public class FlightBookingSystem{
         }
     }    
     // method to print booked passengers it takes the flight num as parmeter and comper it with flight num of any flight in the array and if found one it checks flight num with tickets flight num and if found print the name of ticket
-    public void PrintBookedPassengers(String flightNum){ 
+    public void printBookedPassengers(String flightNum){ 
         for(int i =0;i<count;i++){
             if(flightNum.equals(flights[i].getflightNum())){
                 System.out.println("Booked Passengers for Flight "+flightNum+":");
