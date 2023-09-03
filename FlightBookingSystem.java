@@ -104,7 +104,7 @@ public class FlightBookingSystem{
         }
     }
     // method to print all availlable flights simply the method checks if the flight still have tickets if yes it print its info
-    public void printAvailableFlights(){
+    public void printAvailableFlights() throws Exception{
         if(count <=0)
             System.out.println("Error: theres no flights.");
 

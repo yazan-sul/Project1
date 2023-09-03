@@ -2,7 +2,7 @@ import java.util.Scanner;
 // main class
 public class Project{
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         System.out.println("Flight Ticket Booking System");
         //System.out.println();
         //System.out.println("1. Add New Flight\n"+ "2. Book Ticket\n"+ "3. Update Ticket\n"+ "4. Remove Ticket\n" + "5. Print Booked Passengers\n"+ "6. Display Available Flights\n" +"7. Exit");
