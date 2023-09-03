@@ -19,16 +19,17 @@ public class Flight{
         this.numOfTickets = numOfTickets;
         this.ticketPrice = ticketPrice;
     }
+    
     // boolean method to check if flight have tickets left it return true and if no it return false
-    public  boolean hasTickets() throws Exception
+    public  boolean hasTickets() throws NullPointerException
     {
         if(numOfTickets==0){
-            throw new Exception("no tickets available");
+            throw new NullPointerException("no tickets available");
         }
         return true;
     }
     // method to book ticket it checks if the object have tickets left first then it book a ticket and store the ticket with the info of flight and its name
-    public Ticket bookTicket(String name) throws Exception
+    public Ticket bookTicket(String name) throws NullPointerException
     {        
         if(this.hasTickets())
             this.numOfTickets--;

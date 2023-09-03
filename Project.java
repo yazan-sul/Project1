@@ -1,18 +1,28 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 // main class
 public class Project{
     
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws java.util.InputMismatchException,IllegalArgumentException,FileNotFoundException,FlightFullException{
         System.out.println("Flight Ticket Booking System");
+        Scanner input = new Scanner(System.in);
+
         //System.out.println();
         //System.out.println("1. Add New Flight\n"+ "2. Book Ticket\n"+ "3. Update Ticket\n"+ "4. Remove Ticket\n" + "5. Print Booked Passengers\n"+ "6. Display Available Flights\n" +"7. Exit");
         int choice=0;
         // declerin scanner name input to read from user
-        Scanner input = new Scanner(System.in);
+        //Scanner input = new Scanner(System.in);
 
         FlightBookingSystem boksystem = new FlightBookingSystem();
         
+    
         System.out.println();
+        try{
+         readFlightFromFile(boksystem);
+        
+        
         // while user dont enter number 7 the program will continuo
         while(choice != 7){
             // showing the menu for the user evrey time the loop repats    
@@ -25,8 +35,8 @@ public class Project{
             if(choice == 1){
                 Flight flight = readFlight();
                 // it checks if the flight num exists in the array if no it will let the user to add new flight at the number
-                if(boksystem.flightExists(flight.getflightNum()) == false)
-                    boksystem.addFlight(flight);
+                if(boksystem.flightExists(flight.getflightNum()) == false){
+                    boksystem.addFlight(flight);}
                 else 
                     // printing an error message if flight number already exist
                     System.out.println("Error: theres a flight at this number.");
@@ -60,6 +70,7 @@ public class Project{
                 boksystem.printAvailableFlights();
 	        }
             else if (choice == 7){
+                boksystem.printInFile();
                 System.out.println("Thank you for using the Flight Ticket Booking System. Goodbye!");
                 // stop the program and exit
                 break;
@@ -70,8 +81,36 @@ public class Project{
 		        continue;
             }
         }
+        
+    }
+        
+        catch(FileNotFoundException e){
+            System.out.println("file not found");
+        }
+        catch(InputMismatchException Ie){
+            System.out.println("invalid input");
+        }
     }   
     // method to read flight information that return a flight with its info
+    public static Flight readFlightFromFile(FlightBookingSystem boksystem)throws FileNotFoundException{
+        File flightsFile = new File("flights.txt");
+        Scanner input = new Scanner(flightsFile);
+    
+        while(input.hasNext()){
+            String flightNUM = input.next();
+            String destination = input.next();
+            String OriginAirport = input.next();
+            String departureDate = input.next();
+            String departureTime = input.next();
+            int numOfTickets = input.nextInt();
+            int ticketPrice = input.nextInt();
+
+            Flight flight = new Flight(flightNUM, destination, OriginAirport, departureDate, departureTime, numOfTickets, ticketPrice);
+            boksystem.addFlight(flight);
+        }
+        return null;
+    }
+    
     public static Flight readFlight(){
         // declearing a new scanner 
         Scanner sc = new Scanner(System.in);
@@ -106,22 +145,26 @@ public class Project{
         String flightNum = scanForUpdate.next();
         // check if flight num exist and if it exist it will go through update procces
         if(bokSystem.flightExists(flightNum)){
+        try{ 
+
             System.out.println("Enter passenger name to update ticket: ");
             // asks the user to enter the name that he want to change
             String name = scanForUpdate.next();
             // declearing a ticket object that takes name and flight num and search for the ticket if found it return the ticket
             Ticket ticket = bokSystem.findTicket(name,flightNum);
-            if(ticket != null ){
-                System.out.println("Enter new passenger name: ");
-                // if ticket found it tell the user to enter the new name
-                String newName = scanForUpdate.next();
-                // change the name in the found ticket
-                System.out.println("Ticket updated for Flight "+ flightNum+" for passenger " + newName);
-                ticket.setName(newName);
+                if(ticket != null ){
+                    System.out.println("Enter new passenger name: ");
+                    // if ticket found it tell the user to enter the new name
+                    String newName = scanForUpdate.next();
+                    // change the name in the found ticket
+                    System.out.println("Ticket updated for Flight "+ flightNum+" for passenger " + newName);
+                    ticket.setName(newName);
+                }
             }
-            else
-                // print error if not found the ticket 
-                System.out.println("Error: no ticket at this name.");
+            catch(NullPointerException Ne){
+                System.out.println("no ticket at this name");
+            }  
+                
         }
         else{
             // print error if there a flight exist with this num
@@ -151,8 +194,8 @@ public class Project{
                     return flight.bookTicket(name);
                 }
             }
-            catch(Exception e){
-                System.out.print("Error: no tickets avilable. ");
+            catch(NullPointerException e){
+                System.out.print(e);
                 return null;
             }
             // else {
@@ -161,11 +204,12 @@ public class Project{
             //     return null;
             // }
         }
-        
+        else{
             // if user enter flight num that dosent exist
             System.out.println("Error: wrong flight number.");
             return null;
-                
+        }   
+        return null;
     }
     // method to remove a ticket from tickets
     public static void cancelTicket(FlightBookingSystem bokSystem){
@@ -176,20 +220,24 @@ public class Project{
         String flightNum = scanForRemove.next();
         // check if flight num exist
         if(bokSystem.findFlight(flightNum) != null){
-            System.out.println("Enter passenger name to remove ticket: ");
-            // if flight exist it ask the user to enter a name to remove its ticket
-            String name = scanForRemove.next();
-            // remove the ticket
-            bokSystem.cancelTicket(flightNum, name);
+            try{
+                System.out.println("Enter passenger name to remove ticket: ");
+                // if flight exist it ask the user to enter a name to remove its ticket
+                String name = scanForRemove.next();
+                // remove the ticket
+                bokSystem.cancelTicket(flightNum, name);
+            }
+            catch(NullPointerException Ne){
+                System.out.println(Ne);
+            }
         }
-        else{
-            System.out.println("Error: there no flight at this number.");
-        }
+        
     }
     public static void Menu(){
         System.out.println();
         System.out.println("1. Add New Flight\n"+ "2. Book Ticket\n"+ "3. Update Ticket\n"+ "4. Remove Ticket\n" + "5. Print Booked Passengers\n"+ "6. Display Available Flights\n" +"7. Exit");
     }
   
-
+    
+    
 }

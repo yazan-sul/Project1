@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.InputMismatchException;
+
 public class FlightBookingSystem{
     // declearing an  count for flights and tickets
     private int count=0,count1;
@@ -7,6 +12,7 @@ public class FlightBookingSystem{
     public Ticket[] tickets = new Ticket[100];
 
     // method to add flight into array flights
+
     public void addFlight(Flight flight){
         flights[count] = flight;
         count++;
@@ -32,11 +38,13 @@ public class FlightBookingSystem{
         return false;
     }  
     // method type ticket it search for the ticket through its name and flight num
-    public Ticket findTicket(String name,String flightNum){
+    public Ticket findTicket(String name,String flightNum) throws NullPointerException{
         for(int i=0; i<count1;i++){
             // check if ticket in the array and return the ticket if found any ticket with the same name and same flight num
             if (tickets[i].getName().equals(name) && tickets[i].getFlightNum().equals(flightNum))
               return tickets[i];  
+            else 
+                throw new NullPointerException("no ticket at this name");
         }
         return null;
     }
@@ -73,11 +81,11 @@ public class FlightBookingSystem{
         count1--;
     }
     // method to cancel ticket through its name and num
-    public void cancelTicket(String flightNum, String name){
+    public void cancelTicket(String flightNum, String name)throws NullPointerException{
         // store index of the ticket in integer it return -1 if ticket not found
         int i = indexOfTicket(name, flightNum);
         if(i == -1)
-            System.out.println("No such ticket");
+            throw new NullPointerException("no ticket at these name");
         // if ticket found it remove it from the array through its index
         else {
             tickets[i].cancel();
@@ -104,7 +112,7 @@ public class FlightBookingSystem{
         }
     }
     // method to print all availlable flights simply the method checks if the flight still have tickets if yes it print its info
-    public void printAvailableFlights() throws Exception{
+    public void printAvailableFlights() throws FlightFullException{
         if(count <=0)
             System.out.println("Error: theres no flights.");
 
@@ -121,6 +129,12 @@ public class FlightBookingSystem{
             }
         }
     }
-
+    public  void printInFile() throws FileNotFoundException,InputMismatchException{
+        File file = new File("passengers.txt");
+        PrintWriter output = new PrintWriter(file);
+        for(int i = 0; i <count1;i++)
+            output.println("Passnger name: "+tickets[i].getName());
+        output.close();
+    }
 
 }

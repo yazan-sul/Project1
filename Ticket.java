@@ -13,7 +13,7 @@ public class Ticket{
         return custmorName;
     }
     public String toString(){
-        return custmorName;
+        return this.custmorName;
     }
     // setter for custmorName
     public void setName(String newName){
