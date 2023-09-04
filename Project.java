@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.InputMismatchException;
 // main class
 public class Project{
@@ -8,7 +9,7 @@ public class Project{
     public static void main(String[] args) throws java.util.InputMismatchException,IllegalArgumentException,FileNotFoundException,FlightFullException,NullPointerException{
         System.out.println("Flight Ticket Booking System");
         Scanner input = new Scanner(System.in);
-
+       
         //System.out.println();
         //System.out.println("1. Add New Flight\n"+ "2. Book Ticket\n"+ "3. Update Ticket\n"+ "4. Remove Ticket\n" + "5. Print Booked Passengers\n"+ "6. Display Available Flights\n" +"7. Exit");
         int choice=0;
@@ -17,11 +18,15 @@ public class Project{
 
         FlightBookingSystem boksystem = new FlightBookingSystem();
         
+            FlightsFileScanner scanner = new FlightsFileScanner("flights.txt");
+            while(scanner.hasNextFlight()){
+                Flight flight = scanner.readFlight();
+                boksystem.addFlight(flight);
+            }
+            scanner.close();
     
         System.out.println();
         try{
-         readFlightFromFile(boksystem);
-        
         
         // while user dont enter number 7 the program will continuo
         while(choice != 7){
@@ -96,26 +101,11 @@ public class Project{
         catch(InputMismatchException Ie){
             System.out.println("invalid input");
         }
-    }   
-    // method to read flight information that return a flight with its info
-    public static Flight readFlightFromFile(FlightBookingSystem boksystem)throws FileNotFoundException{
-        File flightsFile = new File("flights.txt");
-        Scanner input = new Scanner(flightsFile);
-    
-        while(input.hasNext()){
-            String flightNUM = input.next();
-            String destination = input.next();
-            String OriginAirport = input.next();
-            String departureDate = input.next();
-            String departureTime = input.next();
-            int numOfTickets = input.nextInt();
-            int ticketPrice = input.nextInt();
-
-            Flight flight = new Flight(flightNUM, destination, OriginAirport, departureDate, departureTime, numOfTickets, ticketPrice);
-            boksystem.addFlight(flight);
+        catch(IOException s){
+            System.out.println("invalid input");
         }
-        return null;
-    }
+    }   
+ 
     
     public static Flight readFlight(){
         // declearing a new scanner 
@@ -168,7 +158,7 @@ public class Project{
                 }
             }
             catch(NullPointerException Ne){
-                System.out.println("no ticket at this name");
+                System.out.println("no ticket at this ");
             }  
                 
         }
@@ -201,7 +191,7 @@ public class Project{
                 }
             }
             catch(NullPointerException e){
-                System.out.print(e);
+                System.out.print("no tickettt");
                 return null;
             }
             // else {
@@ -235,7 +225,7 @@ public class Project{
                 bokSystem.cancelTicket(flightNum, name);
             }
             catch(NullPointerException Ne){
-                System.out.println(Ne);
+                System.out.println("no ticket");
             }
         }
         

@@ -44,7 +44,7 @@ public class FlightBookingSystem{
             if (tickets[i].getName().equals(name) && tickets[i].getFlightNum().equals(flightNum))
               return tickets[i];                  
         }
-        throw new NullPointerException("no ticket at this name");
+        throw new NullPointerException();
     }
     // boolean method to check if flight num same as ticket flight num
     public boolean isTicket(Ticket ticket,String flightNum )throws NullPointerException{
@@ -58,7 +58,7 @@ public class FlightBookingSystem{
             if(name.equals(tickets[i].getName()) && flightNum.equals(tickets[i].getFlightNum()))
                 return i;
         }
-        throw new NullPointerException("no ticket at this name");
+        throw new NullPointerException();
     }
     // return the index of the flight
     public int indexOfFlight(String name) throws NullPointerException{
