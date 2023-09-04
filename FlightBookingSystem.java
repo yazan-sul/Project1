@@ -4,33 +4,32 @@ import java.io.PrintWriter;
 import java.util.InputMismatchException;
 
 public class FlightBookingSystem{
-    // declearing an  count for flights and tickets
-    private int count=0,count1;
+    // declearing an  flightsCounts for flights and tickets
+    private int flightsCounts=0,ticketsflightsCounts;
     // delcearing an array of flights to store the flights info in it
     public Flight[] flights = new Flight[100];
     // delcearing an array of tickets to store the tickets info in it
     public Ticket[] tickets = new Ticket[100];
 
     // method to add flight into array flights
-
     public void addFlight(Flight flight){
-        flights[count] = flight;
-        count++;
+        flights[flightsCounts] = flight;
+        flightsCounts++;
     }    
     // method to check if flight exist and return the flight that was searched for
-    public Flight findFlight(String flightNUM){
-        for(int i =0;i<count;i++){
+    public Flight findFlight(String flightNUM)throws Exception{
+        for(int i =0;i<flightsCounts;i++){
             // check if flight exist by checking if the flight num equals flight num of one of the flights in the array
             if(flightNUM.equals(flights[i].getflightNum())){
                 return flights[i];
             }
         }
         // return null if doesnt exist
-        return null;
+        throw new Exception("flight not found.");
     }   
     // boolean method to check if flight exists and return true or return flase if its not
     public boolean flightExists(String flightNUM){  
-        for(int i =0;i<count;i++){
+        for(int i =0;i<flightsCounts;i++){
             // check if flight exist by checking if the flight num equals flight num of one of the flights in the array
             if(flightNUM.equals(flights[i].getflightNum()))
                 return true;
@@ -38,84 +37,81 @@ public class FlightBookingSystem{
         return false;
     }  
     // method type ticket it search for the ticket through its name and flight num
-    public Ticket findTicket(String name,String flightNum) throws NullPointerException{
-        for(int i=0; i<count1;i++){
+    public Ticket findTicket(String name,String flightNum) throws Exception{
+        for(int i=0; i<ticketsflightsCounts;i++){
             // check if ticket in the array and return the ticket if found any ticket with the same name and same flight num
             if (tickets[i].getName().equals(name) && tickets[i].getFlightNum().equals(flightNum))
               return tickets[i];                  
         }
-        throw new NullPointerException();
+        throw new Exception("no ticket found");
     }
-    // boolean method to check if flight num same as ticket flight num
-    public boolean isTicket(Ticket ticket,String flightNum )throws NullPointerException{
-        if(ticket.getFlightNum().equals(flightNum))
-            return true;
-        return false;
-    }
+    
     // return the index of ticket
-    public int indexOfTicket(String name,String flightNum) throws NullPointerException{
-        for(int i=0; i<count1;i++){
+    public int indexOfTicket(String name,String flightNum) throws Exception{
+        for(int i=0; i<ticketsflightsCounts
+;i++){
             if(name.equals(tickets[i].getName()) && flightNum.equals(tickets[i].getFlightNum()))
                 return i;
         }
-        throw new NullPointerException();
+        throw new Exception("Error: ticket not found");
     }
     // return the index of the flight
-    public int indexOfFlight(String name) throws NullPointerException{
-        for(int i=0; i<count;i++){
+    public int indexOfFlight(String name) throws Exception{
+        for(int i=0; i<flightsCounts;i++){
             if(name.equals(flights[i].getflightNum()))
                 return i;
         }
-        throw new NullPointerException("no flight at this number");
+        throw new Exception("no flight at this number");
     }
     // add the ticket to array of tickets
     public void addTicket(Ticket ticket){
-        tickets[count1] = ticket;
-        count1++;
-    }
-    // method to remove any ticket throug its index
-    public void removTicket(int indexToRemove){
-        tickets[indexToRemove] = tickets[count1];
-        count1--;
+        tickets[ticketsflightsCounts
+] = ticket;
+        ticketsflightsCounts
+++;
     }
     // method to cancel ticket through its name and num
-    public void cancelTicket(String flightNum, String name)throws NullPointerException{
+    public void cancelTicket(String flightNum, String name)throws Exception{
         // store index of the ticket in integer it return -1 if ticket not found
         int i = indexOfTicket(name, flightNum);
         if(i == -1)
-            throw new NullPointerException("no ticket at these name");
+            throw new Exception("no ticket at these name");
         // if ticket found it remove it from the array through its index
         else {
             tickets[i].cancel();
-            count1--;
+            ticketsflightsCounts
+    --;
             // put the ticket we want to remove in the last index in the tickets reached
-            tickets[i] = tickets[count1];
+            tickets[i] = tickets[ticketsflightsCounts
+    ];
             // 
-            tickets[count1] = null;
+            tickets[ticketsflightsCounts
+    ] = null;
 
         }
     }    
     // method to print booked passengers it takes the flight num as parmeter and comper it with flight num of any flight in the array and if found one it checks flight num with tickets flight num and if found print the name of ticket
-    public void printBookedPassengers(String flightNum) throws NullPointerException{ 
-        for(int i =0;i<count;i++){
+    public void printBookedPassengers(String flightNum) throws Exception{ 
+        for(int i =0;i<flightsCounts;i++){
             if(flightNum.equals(flights[i].getflightNum())){
                 System.out.println("Booked Passengers for Flight "+flightNum+":");
-                for(int j=0;j<count1;j++)
+                for(int j=0;j<ticketsflightsCounts
+        ;j++)
                     if(flightNum.equals(tickets[j].getFlightNum()))
                         System.out.println("Passenger Name: "+tickets[j]);
             }
             else
-                throw new NullPointerException();            
+                throw new Exception("NO flight number at this number.");            
         }
     }
     // method to print all availlable flights simply the method checks if the flight still have tickets if yes it print its info
-    public void printAvailableFlights() throws FlightFullException{
-        if(count <=0)
+    public void printAvailableFlights(){
+        if(flightsCounts <=0)
             System.out.println("Error: theres no flights.");
 
         else{
             System.out.println("Available Flights:");
-            for(int i=0;i<count;i++){
+            for(int i=0;i<flightsCounts;i++){
                 if(flights[i].hasTickets()){
                     System.out.println(flights[i]);
                     System.out.println("------------------------------");
@@ -129,7 +125,8 @@ public class FlightBookingSystem{
     public  void printInFile() throws FileNotFoundException,InputMismatchException{
         File file = new File("passengers.txt");
         PrintWriter output = new PrintWriter(file);
-        for(int i = 0; i <count1;i++)
+        for(int i = 0; i <ticketsflightsCounts
+;i++)
             output.println("Passnger name: "+tickets[i].getName());
         output.close();
     }

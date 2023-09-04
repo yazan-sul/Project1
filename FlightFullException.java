@@ -1,6 +1,6 @@
 public class FlightFullException extends Exception {
- 
-        public FlightFullException(String message) {
-            super(message);
-        }
+
+    public FlightFullException(String message) {
+        super(message);
     }
+}

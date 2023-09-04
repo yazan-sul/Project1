@@ -21,25 +21,22 @@ public class Flight{
     }
     
     // boolean method to check if flight have tickets left it return true and if no it return false
-    public  boolean hasTickets() throws NullPointerException
+    public  boolean hasTickets()
     {
         if(numOfTickets==0){
-            throw new NullPointerException("no tickets available");
+            return false;
         }
         return true;
     }
     // method to book ticket it checks if the object have tickets left first then it book a ticket and store the ticket with the info of flight and its name
-    public Ticket bookTicket(String name) throws NullPointerException
+    public Ticket bookTicket(String name) throws FlightFullException
     {        
-        if(this.hasTickets())
-            this.numOfTickets--;
-            return new Ticket(name,this);
-        // else
-        // {
-        //     System.out.println("no tickets available");
-        //     // return null if no tickets available
-        //     return null;
-        // }
+        if(!this.hasTickets())
+            throw new FlightFullException("NO TICKETS");
+
+        this.numOfTickets--;
+        return new Ticket(name,this);
+    
     }
     // method to add a ticket to its object when deleted 
     public void deleteTicket(){
