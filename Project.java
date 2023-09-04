@@ -13,18 +13,14 @@ public class Project{
         //System.out.println();
         //System.out.println("1. Add New Flight\n"+ "2. Book Ticket\n"+ "3. Update Ticket\n"+ "4. Remove Ticket\n" + "5. Print Booked Passengers\n"+ "6. Display Available Flights\n" +"7. Exit");
         int choice=0;
-        // declerin scanner name input to read from user
-        //Scanner input = new Scanner(System.in);
 
         FlightBookingSystem boksystem = new FlightBookingSystem();
-        
-            FlightsFileScanner scanner = new FlightsFileScanner("flights.txt");
-            while(scanner.hasNextFlight()){
-                Flight flight = scanner.readFlight();
-                boksystem.addFlight(flight);
-            }
-            scanner.close();
-    
+        FlightsFileScanner scanner = new FlightsFileScanner("flights.txt");
+        while(scanner.hasNextFlight()){
+            Flight flight = scanner.readFlight();
+            boksystem.addFlight(flight);
+        }
+        scanner.close();
         System.out.println();
         try{
         

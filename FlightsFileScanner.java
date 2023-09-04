@@ -11,8 +11,6 @@ public class FlightsFileScanner {
     }
     public Flight readFlight() {
         String[] tokens = scanner.nextLine().split(",");
-        // for(int i =0;i<tokens.length;i++)
-        //     System.out.print(tokens[i]+" ");
         return new Flight(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]));
     }
     public boolean hasNextFlight() {
