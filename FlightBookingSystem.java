@@ -42,33 +42,31 @@ public class FlightBookingSystem{
         for(int i=0; i<count1;i++){
             // check if ticket in the array and return the ticket if found any ticket with the same name and same flight num
             if (tickets[i].getName().equals(name) && tickets[i].getFlightNum().equals(flightNum))
-              return tickets[i];  
-            else 
-                throw new NullPointerException("no ticket at this name");
+              return tickets[i];                  
         }
-        return null;
+        throw new NullPointerException("no ticket at this name");
     }
     // boolean method to check if flight num same as ticket flight num
-    public boolean isTicket(Ticket ticket,String flightNum ){
+    public boolean isTicket(Ticket ticket,String flightNum )throws NullPointerException{
         if(ticket.getFlightNum().equals(flightNum))
             return true;
         return false;
     }
     // return the index of ticket
-    public int indexOfTicket(String name,String flightNum){
+    public int indexOfTicket(String name,String flightNum) throws NullPointerException{
         for(int i=0; i<count1;i++){
             if(name.equals(tickets[i].getName()) && flightNum.equals(tickets[i].getFlightNum()))
                 return i;
         }
-        return -1;
+        throw new NullPointerException("no ticket at this name");
     }
     // return the index of the flight
-    public int indexOfFlight(String name){
+    public int indexOfFlight(String name) throws NullPointerException{
         for(int i=0; i<count;i++){
             if(name.equals(flights[i].getflightNum()))
                 return i;
         }
-        return -1;
+        throw new NullPointerException("no flight at this number");
     }
     // add the ticket to array of tickets
     public void addTicket(Ticket ticket){
@@ -98,7 +96,7 @@ public class FlightBookingSystem{
         }
     }    
     // method to print booked passengers it takes the flight num as parmeter and comper it with flight num of any flight in the array and if found one it checks flight num with tickets flight num and if found print the name of ticket
-    public void printBookedPassengers(String flightNum){ 
+    public void printBookedPassengers(String flightNum) throws NullPointerException{ 
         for(int i =0;i<count;i++){
             if(flightNum.equals(flights[i].getflightNum())){
                 System.out.println("Booked Passengers for Flight "+flightNum+":");
@@ -107,8 +105,7 @@ public class FlightBookingSystem{
                         System.out.println("Passenger Name: "+tickets[j]);
             }
             else
-                System.out.println("Error: no flight at this number.");
-            
+                throw new NullPointerException();            
         }
     }
     // method to print all availlable flights simply the method checks if the flight still have tickets if yes it print its info

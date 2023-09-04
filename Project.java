@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 // main class
 public class Project{
     
-    public static void main(String[] args) throws java.util.InputMismatchException,IllegalArgumentException,FileNotFoundException,FlightFullException{
+    public static void main(String[] args) throws java.util.InputMismatchException,IllegalArgumentException,FileNotFoundException,FlightFullException,NullPointerException{
         System.out.println("Flight Ticket Booking System");
         Scanner input = new Scanner(System.in);
 
@@ -61,9 +61,15 @@ public class Project{
             else if (choice == 5){
                 System.out.print("Enter the flight number to view booked passengers: " );
                 // read a flight num from user
-                String NumOfFLIGHT = input.next();
-                //giving the object the flight num to check and print booked passengers
-                boksystem.printBookedPassengers(NumOfFLIGHT);
+                try{
+                    String NumOfFLIGHT = input.next();
+                    //giving the object the flight num to check and print booked passengers
+                    boksystem.printBookedPassengers(NumOfFLIGHT);
+                }
+                catch(NullPointerException e){
+                    System.out.println("no ticket at this name");;
+                }
+
             }
             else if (choice == 6){
                 // print available flights that still have tickets
@@ -225,6 +231,7 @@ public class Project{
                 // if flight exist it ask the user to enter a name to remove its ticket
                 String name = scanForRemove.next();
                 // remove the ticket
+                System.out.println("ticket canceld");
                 bokSystem.cancelTicket(flightNum, name);
             }
             catch(NullPointerException Ne){
