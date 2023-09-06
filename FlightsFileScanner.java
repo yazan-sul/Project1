@@ -9,7 +9,7 @@ public class FlightsFileScanner {
         File flightsFile = new File(fileName);
         this.scanner = new Scanner(flightsFile);
     }
-    public Flight readFlight() {
+    public Flight readFlight() throws NumberFormatException {
         String[] tokens = scanner.nextLine().split(",");
         return new Flight(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]));
     }

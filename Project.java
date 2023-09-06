@@ -5,10 +5,11 @@ import java.util.InputMismatchException;
 
 // main class
 public class Project {
+    private static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         System.out.println("Flight Ticket Booking System");
-        Scanner input = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         int choice = 0;
         FlightBookingSystem boksystem = new FlightBookingSystem();
         System.out.println();
@@ -26,8 +27,7 @@ public class Project {
                 Menu();
                 // tell the user to enter his choice
                 System.out.print("Enter your choice: ");
-                choice = input.nextInt();
-                System.out.println();
+                choice = sc.nextInt();
                 // if choice is 1 it will add a flight
                 if (choice == 1) {
                     Flight flight = readFlight();
@@ -59,12 +59,11 @@ public class Project {
                     System.out.print("Enter the flight number to view booked passengers: ");
                     // read a flight num from user
                     try {
-                        String NumOfFLIGHT = input.next();
+                        String NumOfFLIGHT = sc.next();
                         // giving the object the flight num to check and print booked passengers
                         boksystem.printBookedPassengers(NumOfFLIGHT);
-                    } catch (NullPointerException e) {
+                    } catch (Exception e) {
                         System.out.println("no ticket at this name");
-                        ;
                     }
 
                 } else if (choice == 6) {
@@ -82,21 +81,22 @@ public class Project {
                     continue;
                 }
             }
-            input.close();
         }
-
+        catch (NumberFormatException nfe){
+            System.out.println(nfe + " problems in data reading");
+        }
         catch (FileNotFoundException e) {
-            System.out.println("file not found");
+            System.out.println(e);
         } catch (InputMismatchException Ie) {
             System.out.println("invalid input");
         } catch (Exception s) {
             System.out.println(s);
         }
+
     }
 
     public static Flight readFlight() {
         // declearing a new scanner
-        Scanner sc = new Scanner(System.in);
         // the following messges to tell the user to enter info and read it into the
         // flight
         System.out.print("Enter flight number: ");
@@ -116,56 +116,52 @@ public class Project {
         System.out.print("Flight added successfully!");
 
         System.out.println();
-        sc.close();
-
         // return object type flight with the info
-        return new Flight(flightNUM, destination, OriginAirport, departureDate, departureTime, numOfTickets,ticketPrice);
+        return new Flight(flightNUM, destination, OriginAirport, departureDate, departureTime, numOfTickets,
+                ticketPrice);
     }
 
     // method to update flight it takes object from type FlightBookingSystem
     public static void updateFlight(FlightBookingSystem bokSystem) {
         // declearing a new scanner
-        Scanner scanForUpdate = new Scanner(System.in);
         System.out.println("Enter the flight number to update ticket: ");
         // read flight num from user
-        String flightNum = scanForUpdate.next();
+        String flightNum = sc.next();
         // check if flight num exist and if it exist it will go through update procces
         if (bokSystem.flightExists(flightNum)) {
             try {
 
                 System.out.println("Enter passenger name to update ticket: ");
                 // asks the user to enter the name that he want to change
-                String name = scanForUpdate.next();
+                String name = sc.next();
                 // declearing a ticket object that takes name and flight num and search for the
                 // ticket if found it return the ticket
                 Ticket ticket = bokSystem.findTicket(name, flightNum);
                 if (ticket != null) {
                     System.out.println("Enter new passenger name: ");
                     // if ticket found it tell the user to enter the new name
-                    String newName = scanForUpdate.next();
+                    String newName = sc.next();
                     // change the name in the found ticket
                     System.out.println("Ticket updated for Flight " + flightNum + " for passenger " + newName);
                     ticket.setName(newName);
                 }
             } catch (Exception Ne) {
-                System.out.println("no ticket at this ");
+                System.out.println(Ne);
             }
 
         } else {
             // print error if there a flight exist with this num
             System.out.println("Error: theres no flight at this num.");
         }
-        scanForUpdate.close();
     }
 
     // method to book ticket that take object type FlightBookingSystem class
     public static Ticket bookFlight(FlightBookingSystem bokSystem) {
         // declearing new scanner
-        Scanner Book = new Scanner(System.in);
         System.out.println();
         System.out.println("Enter the flight number to book tickets: ");
         // read from user the flight num
-        String Num = Book.nextLine();
+        String Num = sc.nextLine();
         // check if flight num exist
         try {
             // declearing object type flight
@@ -174,43 +170,49 @@ public class Project {
             if (flight.hasTickets() == true) {
                 // if have tickets it read from user a name to book
                 System.out.print("Enter passnger name: ");
-                String name = Book.nextLine();
+                String name = sc.nextLine();
                 System.out.println("Ticket booked for flight " + Num + " for passnger " + name);
                 // return a ticket with name booked in it
-                Book.close();
                 return flight.bookTicket(name);
             }
             else{
-                System.out.println("Error: no tickets.");
+                throw new NoTicketsAvailableException("no tickets available.");
             }
+
+        } catch (NoTicketsAvailableException ffe) {
+            System.out.println(ffe);
         } catch (Exception e) {
             // if user enter flight num that dosent exist
             System.out.println("Error: wrong flight number.");
         }
-        Book.close();
+        
         return null;
     }
 
     // method to remove a ticket from tickets
     public static void cancelTicket(FlightBookingSystem bokSystem) {
         // declearing an object
-        Scanner scanForRemove = new Scanner(System.in);
         System.out.println("Enter the flight number to remove ticket: ");
         // read the flight num
-        String flightNum = scanForRemove.next();
+        String flightNum = sc.next();
         // check if flight num exist
-        try{
-            System.out.println("Enter passenger name to remove ticket: ");
-            // if flight exist it ask the user to enter a name to remove its ticket
-            String name = scanForRemove.next();
-            // remove the ticket
-            System.out.println("ticket canceld");
-            bokSystem.cancelTicket(flightNum, name);  
+        if (bokSystem.flightExists(flightNum)) {
+            try {
+                System.out.println("Enter passenger name to remove ticket: ");
+                // if flight exist it ask the user to enter a name to remove its ticket
+                String name = sc.next();
+                // remove the ticket
+                bokSystem.cancelTicket(flightNum, name);
+                System.out.println("ticket canceld");
+
+            }
+
+            catch (Exception a) {
+                System.out.println(a);
+            }
+        } else {
+            System.out.println("Error: theres no flight at this num.");
         }
-        catch(Exception a){
-            System.out.println(a);
-        }
-        scanForRemove.close();
     }
 
     public static void Menu() {

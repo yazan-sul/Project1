@@ -21,7 +21,7 @@ public class Flight{
     }
     
     // boolean method to check if flight have tickets left it return true and if no it return false
-    public  boolean hasTickets()
+    public  boolean hasTickets() 
     {
         if(numOfTickets==0){
             return false;
@@ -29,10 +29,10 @@ public class Flight{
         return true;
     }
     // method to book ticket it checks if the object have tickets left first then it book a ticket and store the ticket with the info of flight and its name
-    public Ticket bookTicket(String name) throws FlightFullException
+    public Ticket bookTicket(String name) throws Exception
     {        
         if(!this.hasTickets())
-            throw new FlightFullException("NO TICKETS");
+            throw new Exception("NO TICKETS");
 
         this.numOfTickets--;
         return new Ticket(name,this);
